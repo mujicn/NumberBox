@@ -43,11 +43,11 @@ public partial class DecimalBox : NumberBox
     {
         base.OnInitialized(e);
 
-        // initiale Befüllung des eigentlichen Text-Properties der TextBox
+        // apply initial Text value
         Text = Value?.ToString();
     }
 
-    // Zusatzfunktionen über Tastatureingaben
+    // additional features through keyboard input
     private void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         var currentValue = Value;
@@ -59,7 +59,7 @@ public partial class DecimalBox : NumberBox
 
         switch (e.Key)
         {
-            // Wert + 1
+            // Value + 1
             case Key.Up:
                 currentValue += delta;
 
@@ -67,13 +67,13 @@ public partial class DecimalBox : NumberBox
                     Text = currentValue.ToString();
                 break;
 
-            // Wert - 1
+            // Value - 1
             case Key.Down when (currentValue - delta) >= 0:
                 currentValue -= delta;
                 Text = currentValue.ToString();
                 break;
 
-            // Beistrich einfügen
+            // Insert comma by space key
             case Key.Space:
                 if (Text.Contains(',', StringComparison.Ordinal))
                     break;
@@ -88,7 +88,7 @@ public partial class DecimalBox : NumberBox
         SelectionStart = Text.Length;
     }
 
-    // Prüft die eingegebenen Zeichen per Regex
+    // Prevents invalid characters from beeing entered
     protected override bool IsTextAllowed(string text)
     {
         text = text?.Trim();
