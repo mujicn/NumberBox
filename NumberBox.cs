@@ -23,20 +23,20 @@ public abstract class NumberBox : TextBox
         var selectionLength = SelectionLength;
 
         if (selectionLength > 0)
-            // Wenn der Text markiert ist, ersetze ihn durch den neuen Text
+            // replace selected text
             return currentText.Remove(selectionStart, selectionLength).Insert(selectionStart, addedText);
 
-        // Wenn kein Text markiert ist, füge den neuen Text an der Cursorposition ein
+        // add text at cursor position
         return currentText.Insert(selectionStart, addedText);
     }
 
-    // Sorgt dafür, dass der Cursor immer ans Ende der Zahl springt
+    // ensures that the cursor is placed at the end
     protected void OnGotFocus(object sender, RoutedEventArgs e)
     {
         SelectionStart = Text.Length;
     }
 
-    // Verhindert die Eingabe von ungültigen Zeichen
+    // prevents invalid characters from beeing entered
     protected void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
     {
         var updatedText = GetUpdatedText(e.Text);
@@ -45,7 +45,7 @@ public abstract class NumberBox : TextBox
         e.Handled = !IsTextAllowed(updatedText);
     }
 
-    // Einfügen aus Zwischenablage
+    // paste from clipboard
     protected void OnPaste(object sender, DataObjectPastingEventArgs e)
     {
         if (!e.DataObject.GetDataPresent(typeof(string)))
