@@ -59,7 +59,7 @@ public partial class DecimalBox : NumberBox
 
         switch (e.Key)
         {
-            // Value + 1
+            // value + 1
             case Key.Up:
                 currentValue += delta;
 
@@ -67,13 +67,13 @@ public partial class DecimalBox : NumberBox
                     Text = currentValue.ToString();
                 break;
 
-            // Value - 1
+            // value - 1
             case Key.Down when (currentValue - delta) >= 0:
                 currentValue -= delta;
                 Text = currentValue.ToString();
                 break;
 
-            // Insert comma by space key
+            // insert comma by space key
             case Key.Space:
                 if (Text.Contains(',', StringComparison.Ordinal))
                     break;
@@ -88,7 +88,7 @@ public partial class DecimalBox : NumberBox
         SelectionStart = Text.Length;
     }
 
-    // Prevents invalid characters from beeing entered
+    // prevents invalid characters from beeing entered
     protected override bool IsTextAllowed(string text)
     {
         text = text?.Trim();
