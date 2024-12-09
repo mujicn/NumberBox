@@ -44,11 +44,11 @@ public partial class IntegerBox : NumberBox
     {
         base.OnInitialized(e);
 
-        // initiale Befüllung des eigentlichen Text-Properties der TextBox
+        // apply initial Text value
         Text = Value?.ToString();
     }
 
-    // Zusatzfunktionen über Tastatureingaben
+    // additional features through keyboard input
     private void OnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         var currentValue = Value;
@@ -57,7 +57,7 @@ public partial class IntegerBox : NumberBox
 
         switch (e.Key)
         {
-            // Wert + 1
+            // value + 1
             case Key.Up:
                 currentValue += 1;
 
@@ -65,7 +65,7 @@ public partial class IntegerBox : NumberBox
                     Text = currentValue.ToString();
                 break;
 
-            // Wert - 1
+            // value - 1
             case Key.Down when (currentValue - 1) >= 0:
                 currentValue -= 1;
                 Text = currentValue.ToString();
@@ -78,7 +78,7 @@ public partial class IntegerBox : NumberBox
         SelectionStart = Text.Length;
     }
 
-    // Prüft die eingegebenen Zeichen per Regex
+    // prevents invalid characters from beeing entered
     protected override bool IsTextAllowed(string text)
     {
         text = text?.Trim();
